@@ -1,0 +1,65 @@
+---
+- name: apt update
+  sudo: yes
+  apt:
+    update_cache: yes
+
+- name: apt install
+  sudo: yes
+  apt:
+    name: "{{ item }}"
+  with_items: apt_packages
+
+- name: update locale
+  sudo: yes
+  replace:
+    dest: /etc/locale.gen
+    regexp: ^\# ja_JP.UTF-8 UTF-8$
+    replace: ja_JP.UTF-8 UTF-8
+  notify: update-locale
+
+- name: stat localtime
+  stat:
+    path: /etc/localtime
+  register: stat_localtime
+
+- name: update zone
+  sudo: yes
+  command: ln -sf /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
+  when: stat_localtime.stat.islnk == false
+
+- name: deploy .bash_profile
+  copy:
+    src: .bash_profile
+    dest: ~/.bash_profile
+
+- name: deploy .gitconfig
+  copy:
+    src: .gitconfig
+    dest: ~/.gitconfig
+
+- name: stat drive command
+  stat:
+    path: ~/gopath/bin/drive
+  register: stat_drive
+
+- name: install drive
+  command: go get -u github.com/odeke-em/drive/cmd/drive
+  when: stat_drive.stat.exists == false
+
+- name: deploy init.el
+  copy:
+    src: .emacs.d/init.el
+    dest: ~/.emacs.d/init.el
+
+- name: deploy lein script
+  copy:
+    src: bin/lein
+    dest: ~/bin/lein
+    mode: 0744
+  notify: install leiningen
+
+- name: deploy profiles.clj
+  copy:
+    src: .lein/profiles.clj
+    dest: ~/.lein/profiles.clj

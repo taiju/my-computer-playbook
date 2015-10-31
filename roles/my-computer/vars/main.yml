@@ -1,0 +1,24 @@
+---
+apt_packages:
+  - gcc
+  - make
+  - task-japanese
+  - info
+  - texinfo
+  - install-info
+  - emacs24-nox
+  - emacs24-common-non-dfsg
+  - emacs24-el
+  - emacs-mozc
+  - gawk
+  - git
+  - tree
+  - gnupg2
+  - golang
+  - sbcl
+  - chicken-bin
+  - libchicken-dev
+  - libchicken7
+  - gauche
+  - gauche-dev
+  - gauche-doc # not include reference manuals at debian/jessie
