@@ -49,7 +49,7 @@
   register: stat_drive
 
 - name: install drive
-  command: go get -u github.com/odeke-em/drive/cmd/drive
+  shell: GOPATH=~/gopath go get -u github.com/odeke-em/drive/cmd/drive
   when: stat_drive.stat.exists == false
 
 - name: create .emacs.d
