@@ -3,6 +3,7 @@
 (require 'cl-lib)
 (defvar install-packages '(cider
                            clojure-mode
+                           haskell-mode
                            ido-at-point
                            ido-ubiquitous
                            ido-vertical-mode
