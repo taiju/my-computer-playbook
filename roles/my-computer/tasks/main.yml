@@ -51,15 +51,3 @@
   copy:
     src: .emacs.d/init.el
     dest: ~/.emacs.d/init.el
-
-- name: deploy lein script
-  copy:
-    src: bin/lein
-    dest: ~/bin/lein
-    mode: 0744
-  notify: install leiningen
-
-- name: deploy profiles.clj
-  copy:
-    src: .lein/profiles.clj
-    dest: ~/.lein/profiles.clj

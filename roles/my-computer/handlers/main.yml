@@ -4,11 +4,3 @@
   shell: |
     locale-gen
     update-locale LANG=ja_JP.UTF-8
-
-- name: install leiningen
-  command: ~/bin/lein
-
-- name: deploy profiles.clj
-  copy:
-    src: .lein/profiles.clj
-    dest: ~/.lein/profiles.clj
