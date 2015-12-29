@@ -7,7 +7,7 @@ apt_packages:
   - texinfo
   - install-info
   - emacs24-nox
-  - emacs24-common-non-dfsg
+#  - emacs24-common-non-dfsg
   - emacs24-el
   - emacs-mozc
   - gawk
