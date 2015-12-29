@@ -38,6 +38,11 @@
     src: .gitconfig
     dest: ~/.gitconfig
 
+- name: create gopath
+  file:
+    path: ~/gopath
+    state: directory
+
 - name: stat drive command
   stat:
     path: ~/gopath/bin/drive
@@ -46,6 +51,11 @@
 - name: install drive
   command: go get -u github.com/odeke-em/drive/cmd/drive
   when: stat_drive.stat.exists == false
+
+- name: create .emacs.d
+  file:
+    path: ~/.emacs.d
+    state: directory
 
 - name: deploy init.el
   copy:
